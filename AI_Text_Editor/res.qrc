@@ -1,0 +1,39 @@
+<RCC>
+  <qresource prefix="img">
+    <file>resources/imgs/_app_icon.ico</file>
+    <file>resources/imgs/app_info.png</file>
+    <file>resources/imgs/bg_color.png</file>
+    <file>resources/imgs/bot.png</file>
+    <file>resources/imgs/bot.svg</file>
+    <file>resources/imgs/Calendar.png</file>
+    <file>resources/imgs/change_text_color.png</file>
+    <file>resources/imgs/clear_all.ico</file>
+    <file>resources/imgs/Clock.png</file>
+    <file>resources/imgs/Copy.png</file>
+    <file>resources/imgs/Cut.png</file>
+    <file>resources/imgs/dev_info.png</file>
+    <file>resources/imgs/doc_pdf.png</file>
+    <file>resources/imgs/edit-bold.png</file>
+    <file>resources/imgs/edit-italic.png</file>
+    <file>resources/imgs/exit.png</file>
+    <file>resources/imgs/font.png</file>
+    <file>resources/imgs/new.png</file>
+    <file>resources/imgs/open.png</file>
+    <file>resources/imgs/Paste.png</file>
+    <file>resources/imgs/personal-information.ico</file>
+    <file>resources/imgs/Preview.png</file>
+    <file>resources/imgs/Print.png</file>
+    <file>resources/imgs/Redo.png</file>
+    <file>resources/imgs/save.png</file>
+    <file>resources/imgs/save_as.png</file>
+    <file>resources/imgs/select_all.png</file>
+    <file>resources/imgs/text_align_center.png</file>
+    <file>resources/imgs/text_align_justify.png</file>
+    <file>resources/imgs/text_align_left.png</file>
+    <file>resources/imgs/text_align_right.png</file>
+    <file>resources/imgs/text_bold.png</file>
+    <file>resources/imgs/text_italic.png</file>
+    <file>resources/imgs/underline_icon.png</file>
+    <file>resources/imgs/Undo.png</file>
+  </qresource>
+</RCC>

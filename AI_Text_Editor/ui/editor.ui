@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Editor</class>
+ <widget class="QMainWindow" name="Editor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Tommy's Docs</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../res.qrc">
+    <normaloff>:/img/resources/imgs/_app_icon.ico</normaloff>:/img/resources/imgs/_app_icon.ico</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <widget class="QSplitter" name="splitter_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="childrenCollapsible">
+       <bool>false</bool>
+      </property>
+      <widget class="QTextEdit" name="textEdit">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QFrame" name="chatbot_frame">
+       <property name="maximumSize">
+        <size>
+         <width>400</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QSplitter" name="splitter">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="childrenCollapsible">
+           <bool>false</bool>
+          </property>
+          <widget class="QTextEdit" name="prompt">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="placeholderText">
+            <string>Tell me something....</string>
+           </property>
+          </widget>
+          <widget class="QTextEdit" name="response">
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+          </widget>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="frame">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QPushButton" name="send_pushButton">
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(0, 170, 127);
+color: rgb(255, 255, 255);</string>
+             </property>
+             <property name="text">
+              <string>Send</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="insert_pushButton">
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(0, 0, 255);
+color: rgb(255, 255, 255);</string>
+             </property>
+             <property name="text">
+              <string>Insert into editor</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionNew"/>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSave_As"/>
+    <addaction name="separator"/>
+    <addaction name="actionPrint"/>
+    <addaction name="actionPrint_Preview"/>
+    <addaction name="actionExport_to_PDF"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuEidt">
+    <property name="title">
+     <string>Eidt</string>
+    </property>
+    <addaction name="actionCopy"/>
+    <addaction name="actionCut"/>
+    <addaction name="actionPaste"/>
+    <addaction name="separator"/>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+    <addaction name="separator"/>
+    <addaction name="actionSelect_All"/>
+   </widget>
+   <widget class="QMenu" name="menuChange">
+    <property name="title">
+     <string>Change</string>
+    </property>
+    <addaction name="actionChange_Font_Color"/>
+    <addaction name="actionChange_Background_Color"/>
+   </widget>
+   <widget class="QMenu" name="menuInsert">
+    <property name="title">
+     <string>Insert</string>
+    </property>
+    <addaction name="actionInsert_Time"/>
+    <addaction name="actionInsert_Date"/>
+   </widget>
+   <widget class="QMenu" name="menuAssistant">
+    <property name="title">
+     <string>Assistant</string>
+    </property>
+    <addaction name="actionOpen_Assistant"/>
+    <addaction name="actionParaphrase_Text"/>
+    <addaction name="actionSummarize_Text"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+    <addaction name="actionDeveloper"/>
+    <addaction name="actionAbout_App"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEidt"/>
+   <addaction name="menuChange"/>
+   <addaction name="menuInsert"/>
+   <addaction name="menuAssistant"/>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionNew"/>
+   <addaction name="actionOpen"/>
+   <addaction name="actionSave"/>
+   <addaction name="separator"/>
+   <addaction name="actionCut"/>
+   <addaction name="actionCopy"/>
+   <addaction name="actionPaste"/>
+   <addaction name="separator"/>
+   <addaction name="actionBold"/>
+   <addaction name="actionItalics"/>
+   <addaction name="actionUnderline"/>
+   <addaction name="separator"/>
+   <addaction name="actionAlign_Left"/>
+   <addaction name="actionAlign_Center"/>
+   <addaction name="actionAligh_Right"/>
+   <addaction name="actionAlign_Justify"/>
+   <addaction name="separator"/>
+   <addaction name="actionUndo"/>
+   <addaction name="actionRedo"/>
+   <addaction name="separator"/>
+   <addaction name="actionFont_Options"/>
+   <addaction name="actionChange_Font_Color"/>
+   <addaction name="actionChange_Background_Color"/>
+   <addaction name="separator"/>
+   <addaction name="actionExport_to_PDF"/>
+   <addaction name="actionPrint_Preview"/>
+   <addaction name="actionPrint"/>
+   <addaction name="separator"/>
+   <addaction name="actionInsert_Date"/>
+   <addaction name="actionInsert_Time"/>
+   <addaction name="separator"/>
+   <addaction name="actionOpen_Assistant"/>
+  </widget>
+  <action name="actionNew">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/new.png</normaloff>:/img/resources/imgs/new.png</iconset>
+   </property>
+   <property name="text">
+    <string>New</string>
+   </property>
+   <property name="toolTip">
+    <string>Create a new file</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/open.png</normaloff>:/img/resources/imgs/open.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+   <property name="toolTip">
+    <string>Open a file</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/save.png</normaloff>:/img/resources/imgs/save.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+   <property name="toolTip">
+    <string>Save this file</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionSave_As">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/save_as.png</normaloff>:/img/resources/imgs/save_as.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save As</string>
+   </property>
+   <property name="toolTip">
+    <string>Save as</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+ß</string>
+   </property>
+  </action>
+  <action name="actionCut">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/Cut.png</normaloff>:/img/resources/imgs/Cut.png</iconset>
+   </property>
+   <property name="text">
+    <string>Cut</string>
+   </property>
+   <property name="toolTip">
+    <string>Cut</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="actionCopy">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/Copy.png</normaloff>:/img/resources/imgs/Copy.png</iconset>
+   </property>
+   <property name="text">
+    <string>Copy</string>
+   </property>
+   <property name="toolTip">
+    <string>Copy selected text</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionPaste">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/Paste.png</normaloff>:/img/resources/imgs/Paste.png</iconset>
+   </property>
+   <property name="text">
+    <string>Paste</string>
+   </property>
+   <property name="toolTip">
+    <string>Paste text</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
+   </property>
+  </action>
+  <action name="actionAlign_Left">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/text_align_left.png</normaloff>:/img/resources/imgs/text_align_left.png</iconset>
+   </property>
+   <property name="text">
+    <string>Align Left</string>
+   </property>
+   <property name="toolTip">
+    <string>Align text to the left</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
+   </property>
+  </action>
+  <action name="actionAligh_Right">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/text_align_right.png</normaloff>:/img/resources/imgs/text_align_right.png</iconset>
+   </property>
+   <property name="text">
+    <string>Aligh Right</string>
+   </property>
+   <property name="toolTip">
+    <string>Align text to the right</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionAlign_Center">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/text_align_center.png</normaloff>:/img/resources/imgs/text_align_center.png</iconset>
+   </property>
+   <property name="text">
+    <string>Align Center</string>
+   </property>
+   <property name="toolTip">
+    <string>Aling text to the center</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
+  </action>
+  <action name="actionAlign_Justify">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/text_align_justify.png</normaloff>:/img/resources/imgs/text_align_justify.png</iconset>
+   </property>
+   <property name="text">
+    <string>Align Justify</string>
+   </property>
+   <property name="toolTip">
+    <string>Justify text alignment</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+J</string>
+   </property>
+  </action>
+  <action name="actionBold">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/text_bold.png</normaloff>:/img/resources/imgs/text_bold.png</iconset>
+   </property>
+   <property name="text">
+    <string>Bold</string>
+   </property>
+   <property name="toolTip">
+    <string>Make text bold</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+B</string>
+   </property>
+  </action>
+  <action name="actionItalics">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/text_italic.png</normaloff>:/img/resources/imgs/text_italic.png</iconset>
+   </property>
+   <property name="text">
+    <string>Italics</string>
+   </property>
+   <property name="toolTip">
+    <string>Italicisize text</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I</string>
+   </property>
+  </action>
+  <action name="actionUnderline">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/underline_icon.png</normaloff>:/img/resources/imgs/underline_icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Underline</string>
+   </property>
+   <property name="toolTip">
+    <string>Underline text</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/Undo.png</normaloff>:/img/resources/imgs/Undo.png</iconset>
+   </property>
+   <property name="text">
+    <string>Undo</string>
+   </property>
+   <property name="toolTip">
+    <string>Undo recent activity</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/Redo.png</normaloff>:/img/resources/imgs/Redo.png</iconset>
+   </property>
+   <property name="text">
+    <string>Redo</string>
+   </property>
+   <property name="toolTip">
+    <string>Redo recent activity</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Y</string>
+   </property>
+  </action>
+  <action name="actionFont_Options">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/font.png</normaloff>:/img/resources/imgs/font.png</iconset>
+   </property>
+   <property name="text">
+    <string>Font Options</string>
+   </property>
+   <property name="toolTip">
+    <string>Change font options</string>
+   </property>
+  </action>
+  <action name="actionChange_Font_Color">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/change_text_color.png</normaloff>:/img/resources/imgs/change_text_color.png</iconset>
+   </property>
+   <property name="text">
+    <string>Change Font Color</string>
+   </property>
+   <property name="toolTip">
+    <string>Change font color</string>
+   </property>
+  </action>
+  <action name="actionChange_Background_Color">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/bg_color.png</normaloff>:/img/resources/imgs/bg_color.png</iconset>
+   </property>
+   <property name="text">
+    <string>Change Background Color</string>
+   </property>
+   <property name="toolTip">
+    <string>Change background color</string>
+   </property>
+  </action>
+  <action name="actionInsert_Date">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/Calendar.png</normaloff>:/img/resources/imgs/Calendar.png</iconset>
+   </property>
+   <property name="text">
+    <string>Insert Date</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert today's date</string>
+   </property>
+  </action>
+  <action name="actionInsert_Time">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/Clock.png</normaloff>:/img/resources/imgs/Clock.png</iconset>
+   </property>
+   <property name="text">
+    <string>Insert Time</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert current time</string>
+   </property>
+  </action>
+  <action name="actionExport_to_PDF">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/doc_pdf.png</normaloff>:/img/resources/imgs/doc_pdf.png</iconset>
+   </property>
+   <property name="text">
+    <string>Export to PDF</string>
+   </property>
+   <property name="toolTip">
+    <string>Export document as pdf</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+Shift+E</string>
+   </property>
+  </action>
+  <action name="actionPrint_Preview">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/Preview.png</normaloff>:/img/resources/imgs/Preview.png</iconset>
+   </property>
+   <property name="text">
+    <string>Print Preview</string>
+   </property>
+   <property name="toolTip">
+    <string>open print preview</string>
+   </property>
+  </action>
+  <action name="actionPrint">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/Print.png</normaloff>:/img/resources/imgs/Print.png</iconset>
+   </property>
+   <property name="text">
+    <string>Print</string>
+   </property>
+   <property name="toolTip">
+    <string>Print document</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionOpen_Assistant">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/bot.png</normaloff>:/img/resources/imgs/bot.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open Assistant</string>
+   </property>
+   <property name="toolTip">
+    <string>Open Chatbot</string>
+   </property>
+  </action>
+  <action name="actionSelect_All">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/select_all.png</normaloff>:/img/resources/imgs/select_all.png</iconset>
+   </property>
+   <property name="text">
+    <string>Select All</string>
+   </property>
+   <property name="toolTip">
+    <string>Select all text</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="actionClear_All">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/clear_all.ico</normaloff>:/img/resources/imgs/clear_all.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Clear All</string>
+   </property>
+   <property name="toolTip">
+    <string>Clear all text</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+Del</string>
+   </property>
+  </action>
+  <action name="actionDeveloper">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/personal-information.ico</normaloff>:/img/resources/imgs/personal-information.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Developer</string>
+   </property>
+   <property name="toolTip">
+    <string>About the developer</string>
+   </property>
+  </action>
+  <action name="actionAbout_App">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/app_info.png</normaloff>:/img/resources/imgs/app_info.png</iconset>
+   </property>
+   <property name="text">
+    <string>About App</string>
+   </property>
+   <property name="toolTip">
+    <string>About App</string>
+   </property>
+  </action>
+  <action name="actionParaphrase_Text">
+   <property name="text">
+    <string>Paraphrase Text</string>
+   </property>
+   <property name="toolTip">
+    <string>Paraphrase selected text</string>
+   </property>
+  </action>
+  <action name="actionSummarize_Text">
+   <property name="text">
+    <string>Summarize Text</string>
+   </property>
+   <property name="toolTip">
+    <string>Summarize selected text</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/img/resources/imgs/exit.png</normaloff>:/img/resources/imgs/exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../res.qrc"/>
+ </resources>
+ <connections/>
+</ui>

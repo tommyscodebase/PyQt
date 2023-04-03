@@ -226,7 +226,7 @@ color: rgb(255, 255, 255);</string>
    <addaction name="separator"/>
    <addaction name="actionAlign_Left"/>
    <addaction name="actionAlign_Center"/>
-   <addaction name="actionAligh_Right"/>
+   <addaction name="actionAlign_Right"/>
    <addaction name="actionAlign_Justify"/>
    <addaction name="separator"/>
    <addaction name="actionUndo"/>
@@ -365,7 +365,7 @@ color: rgb(255, 255, 255);</string>
     <string>Ctrl+L</string>
    </property>
   </action>
-  <action name="actionAligh_Right">
+  <action name="actionAlign_Right">
    <property name="icon">
     <iconset resource="../res.qrc">
      <normaloff>:/img/resources/imgs/text_align_right.png</normaloff>:/img/resources/imgs/text_align_right.png</iconset>

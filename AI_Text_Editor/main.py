@@ -35,7 +35,7 @@ class Editor(QMainWindow, Ui_Editor):
         self.actionUnderline.triggered.connect(self.underline)
         self.actionAlign_Left.triggered.connect(self.align_left)
         self.actionAlign_Center.triggered.connect(self.align_center)
-        self.actionAligh_Right.triggered.connect(self.align_right)
+        self.actionAlign_Right.triggered.connect(self.align_right)
         self.actionAlign_Justify.triggered.connect(self.align_justify)
 
     # Functions

@@ -26,6 +26,8 @@ class Editor(QMainWindow, Ui_Editor):
         self.actionOpen_Assistant.triggered.connect(self.open_chatbot)
         self.actionNew.triggered.connect(self.new_file)
         self.actionOpen.triggered.connect(self.open_file)
+        self.actionSave.triggered.connect(self.save_file)
+        self.actionSave_As.triggered.connect(self.save_file_as)
 
     # Functions
     # Set window title
@@ -75,3 +77,35 @@ class Editor(QMainWindow, Ui_Editor):
 
         except Exception as e:
             print(f"File opening error: {e}")
+
+    # Save file
+    def save_file(self):
+        try:
+            if self.path == '':  # If no file is opened, the call save as function
+                self.save_file_as()
+
+            content = self.textEdit.toPlainText().strip()
+
+            with open(self.path, 'w') as file:
+                file.write(content)
+                self.statusbar.showMessage(f'{self.filename} has been saved successfully')
+                self.update_title()
+        except Exception as e:
+            print(f'Error Saving file: {e}')
+
+    # Save As
+    def save_file_as(self):
+        try:
+            path, _ = QFileDialog.getSaveFileName(self, 'Save File As', ':\\',
+                                                  "Text Files (*.txt);; All Files (*.*)"
+                                                  )
+            if path:
+                content = self.textEdit.toPlainText().strip()
+                self.path = path
+                self.filename = os.path.basename(self.path)
+                with open(self.path, 'w') as file:
+                    file.write(content)
+                    self.statusbar.showMessage(f'{self.filename} has been saved successfully')
+                    self.update_title()
+        except Exception as e:
+            print(f'Error Saving file as: {e}')

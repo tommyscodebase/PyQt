@@ -1,5 +1,6 @@
 import os.path
 
+from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import *
 from editor import Ui_Editor
 from functions import *
@@ -28,6 +29,9 @@ class Editor(QMainWindow, Ui_Editor):
         self.actionOpen.triggered.connect(self.open_file)
         self.actionSave.triggered.connect(self.save_file)
         self.actionSave_As.triggered.connect(self.save_file_as)
+        self.actionBold.triggered.connect(self.bold)
+        self.actionItalics.triggered.connect(self.italics)
+        self.actionUnderline.triggered.connect(self.underline)
 
     # Functions
     # Set window title
@@ -109,3 +113,22 @@ class Editor(QMainWindow, Ui_Editor):
                     self.update_title()
         except Exception as e:
             print(f'Error Saving file as: {e}')
+
+    # Bold
+    def bold(self):
+        if self.textEdit.fontWeight() == QFont.Bold:
+            self.textEdit.setFontWeight(QFont.Normal)
+        else:
+            self.textEdit.setFontWeight(QFont.Bold)
+
+    # Italics
+    def italics(self):
+        if self.textEdit.fontItalic() == QFont.StyleItalic:
+            self.textEdit.setFontItalic(False)
+        else:
+            self.textEdit.setFontItalic(True)
+
+    # Underline
+    def underline(self):
+        state = self.textEdit.fontUnderline()
+        self.textEdit.setFontUnderline(not state)

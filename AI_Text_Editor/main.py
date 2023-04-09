@@ -37,6 +37,11 @@ class Editor(QMainWindow, Ui_Editor):
         self.actionAlign_Center.triggered.connect(self.align_center)
         self.actionAlign_Right.triggered.connect(self.align_right)
         self.actionAlign_Justify.triggered.connect(self.align_justify)
+        self.fontcombo.activated.connect(self.font_family)
+        self.font_size.valueChanged.connect(self.set_font_size)
+        self.actionFont_Options.triggered.connect(self.font_options)
+        self.actionChange_Font_Color.triggered.connect(self.text_color)
+        self.actionChange_Background_Color.triggered.connect(self.bg_color)
 
     # Functions
     # Set window title
@@ -153,3 +158,29 @@ class Editor(QMainWindow, Ui_Editor):
     # Align Justify
     def align_justify(self):
         self.textEdit.setAlignment(Qt.AlignJustify)
+
+    # Change text color
+    def text_color(self):
+        color = QColorDialog.getColor()
+        self.textEdit.setTextColor(color)
+
+    # Change background color
+    def bg_color(self):
+        color = QColorDialog.getColor()
+        self.textEdit.setTextBackgroundColor(color)
+
+    # Change font family
+    def font_family(self):
+        font = self.fontcombo.currentText()
+        self.textEdit.setCurrentFont(QFont(font))
+
+    # Change font size
+    def set_font_size(self):
+        size = self.font_size.value()
+        self.textEdit.setFontPointSize(size)
+
+    # Font Options
+    def font_options(self):
+        font, ok = QFontDialog.getFont()
+        if ok:
+            self.textEdit.setFont(font)

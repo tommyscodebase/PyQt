@@ -2,6 +2,7 @@ import os.path
 
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt
+from PyQt5.QtPrintSupport import QPrinter, QPrintDialog, QPrintPreviewDialog
 from PyQt5.QtWidgets import *
 from editor import Ui_Editor
 from functions import *
@@ -42,6 +43,8 @@ class Editor(QMainWindow, Ui_Editor):
         self.actionFont_Options.triggered.connect(self.font_options)
         self.actionChange_Font_Color.triggered.connect(self.text_color)
         self.actionChange_Background_Color.triggered.connect(self.bg_color)
+        self.actionPrint.triggered.connect(self.print_file)
+        self.actionPrint_Preview.triggered.connect(self.print_preview)
 
     # Functions
     # Set window title
@@ -184,3 +187,21 @@ class Editor(QMainWindow, Ui_Editor):
         font, ok = QFontDialog.getFont()
         if ok:
             self.textEdit.setFont(font)
+
+    # Print File
+    def print_file(self):
+        printer = QPrinter(QPrinter.HighResolution)
+        prompt = QPrintDialog(printer, self)
+
+        if prompt.exec_() == QPrintDialog.Accepted:
+            self.textEdit.print_(printer)
+
+    def preview(self, printer):
+        self.textEdit.print_(printer)
+
+    # Print Preview
+    def print_preview(self):
+        printer = QPrinter(QPrinter.HighResolution)
+        dialog = QPrintPreviewDialog(printer, self)
+        dialog.paintRequested.connect(self.preview)
+        dialog.exec_()

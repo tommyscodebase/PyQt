@@ -1,7 +1,7 @@
 import os.path
 
 from PyQt5.QtGui import QFont
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QFileInfo
 from PyQt5.QtPrintSupport import QPrinter, QPrintDialog, QPrintPreviewDialog
 from PyQt5.QtWidgets import *
 from editor import Ui_Editor
@@ -45,6 +45,7 @@ class Editor(QMainWindow, Ui_Editor):
         self.actionChange_Background_Color.triggered.connect(self.bg_color)
         self.actionPrint.triggered.connect(self.print_file)
         self.actionPrint_Preview.triggered.connect(self.print_preview)
+        self.actionExport_to_PDF.triggered.connect(self.export_to_pdf)
 
     # Functions
     # Set window title
@@ -205,3 +206,16 @@ class Editor(QMainWindow, Ui_Editor):
         dialog = QPrintPreviewDialog(printer, self)
         dialog.paintRequested.connect(self.preview)
         dialog.exec_()
+
+    # Export to PDF
+    def export_to_pdf(self):
+        file, _ = QFileDialog.getSaveFileName(self, "Export to PDF", ':\\',
+                                              'PDF Files (*.pdf);; All Files (*.*)'
+                                              )
+        if file:
+            if QFileInfo(file).suffix() == "":
+                file += '.pdf'
+            printer = QPrinter(QPrinter.HighResolution)
+            printer.setOutputFormat(QPrinter.PdfFormat)
+            printer.setOutputFileName(file)
+            self.textEdit.document().print_(printer)

@@ -1,7 +1,7 @@
 import os.path
 
 from PyQt5.QtGui import QFont
-from PyQt5.QtCore import Qt, QFileInfo
+from PyQt5.QtCore import Qt, QFileInfo, QTime, QDate
 from PyQt5.QtPrintSupport import QPrinter, QPrintDialog, QPrintPreviewDialog
 from PyQt5.QtWidgets import *
 from editor import Ui_Editor
@@ -46,6 +46,8 @@ class Editor(QMainWindow, Ui_Editor):
         self.actionPrint.triggered.connect(self.print_file)
         self.actionPrint_Preview.triggered.connect(self.print_preview)
         self.actionExport_to_PDF.triggered.connect(self.export_to_pdf)
+        self.actionInsert_Time.triggered.connect(self.insert_time)
+        self.actionInsert_Date.triggered.connect(self.insert_date)
 
     # Functions
     # Set window title
@@ -219,3 +221,13 @@ class Editor(QMainWindow, Ui_Editor):
             printer.setOutputFormat(QPrinter.PdfFormat)
             printer.setOutputFileName(file)
             self.textEdit.document().print_(printer)
+
+    # Insert Current Time
+    def insert_time(self):
+        time = QTime.currentTime()
+        self.textEdit.insertPlainText(time.toString(Qt.DefaultLocaleLongDate))
+
+    # Insert Current Date
+    def insert_date(self):
+        date = QDate.currentDate()
+        self.textEdit.insertPlainText(date.toString(Qt.DefaultLocaleLongDate))

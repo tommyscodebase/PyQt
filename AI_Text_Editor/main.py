@@ -1,5 +1,7 @@
 import os.path
+import sys
 
+from PyQt5 import QtGui
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt, QFileInfo, QTime, QDate
 from PyQt5.QtPrintSupport import QPrinter, QPrintDialog, QPrintPreviewDialog
@@ -231,3 +233,45 @@ class Editor(QMainWindow, Ui_Editor):
     def insert_date(self):
         date = QDate.currentDate()
         self.textEdit.insertPlainText(date.toString(Qt.DefaultLocaleLongDate))
+
+    # Prompt user to save on exit
+    def closeEvent(self, event):
+        try:
+            # No file opened and editor empty
+            if not self.filename and self.textEdit.toPlainText() == "":
+                sys.exit()
+
+            # Save a new file
+            elif not self.filename and self.textEdit.toPlainText() != "":
+                ask = QMessageBox.question(
+                    self, 'Save File Before Closing',
+                    'This new document has not been saved. Do you want to save it before closing?',
+                    QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel
+                )
+                if ask == QMessageBox.Yes:
+                    self.save_file()
+                    sys.exit()
+                elif ask == QMessageBox.Cancel:
+                    QtGui.QCloseEvent.ignore(event)
+                else:
+                    sys.exit()
+
+            # Save a modified file
+            elif file_changed(self.path, self.textEdit.toPlainText().strip()):
+                ask = QMessageBox.question(
+                    self, 'Save File Before Closing',
+                    f'{self.filename} has been modified. Do you want to save changes before closing?',
+                    QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel
+                )
+                if ask == QMessageBox.Yes:
+                    self.save_file()
+                    sys.exit()
+                elif ask == QMessageBox.Cancel:
+                    QtGui.QCloseEvent.ignore(event)
+                else:
+                    sys.exit()
+            else:
+                sys.exit()
+
+        except Exception as e:
+            print(f"Close event error: {e}")

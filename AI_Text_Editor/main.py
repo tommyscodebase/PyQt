@@ -50,6 +50,10 @@ class Editor(QMainWindow, Ui_Editor):
         self.actionExport_to_PDF.triggered.connect(self.export_to_pdf)
         self.actionInsert_Time.triggered.connect(self.insert_time)
         self.actionInsert_Date.triggered.connect(self.insert_date)
+        self.send_pushButton.clicked.connect(self.send_request)
+        self.insert_pushButton.clicked.connect(self.insert_bot_request)
+        self.actionParaphrase_Text.triggered.connect(self.paraphrase_text)
+        self.actionSummarize_Text.triggered.connect(self.summarize_text)
 
     # Functions
     # Set window title
@@ -275,3 +279,44 @@ class Editor(QMainWindow, Ui_Editor):
 
         except Exception as e:
             print(f"Close event error: {e}")
+
+    # Chatbot Functions
+    def send_request(self):
+        content = self.prompt.toPlainText().strip()
+        try:
+            reply = send_to_openai(content)
+            self.response.clear()
+            self.response.insertPlainText(reply.strip())
+        except Exception as e:
+            print(f"Sending Request Error: {e}")
+
+    def insert_bot_request(self):
+        try:
+            data = self.response.toPlainText().strip()
+            self.textEdit.insertPlainText(data)
+        except Exception as e:
+            print(f"Insert Request Error: {e}")
+
+    def paraphrase_text(self):
+        selected_text = self.textEdit.textCursor().selectedText().strip()
+        data = f"""
+                        Paraphrase the text below:
+                        {selected_text}
+                        """.strip()
+        try:
+            reply = send_to_openai(data)
+            self.textEdit.insertPlainText(reply.strip())
+        except Exception as e:
+            print(f"Paraphrase Error: {e}")
+
+    def summarize_text(self):
+        selected_text = self.textEdit.textCursor().selectedText().strip()
+        data = f"""
+                        Summarize the text below:
+                        {selected_text}
+                        """.strip()
+        try:
+            reply = send_to_openai(data)
+            self.textEdit.insertPlainText(reply.strip())
+        except Exception as e:
+            print(f"Summarize Error: {e}")

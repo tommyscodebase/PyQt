@@ -1,7 +1,6 @@
 import os.path
 import sys
 
-from PyQt5 import QtGui
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt, QFileInfo, QTime, QDate
 from PyQt5.QtPrintSupport import QPrinter, QPrintDialog, QPrintPreviewDialog
@@ -54,6 +53,9 @@ class Editor(QMainWindow, Ui_Editor):
         self.insert_pushButton.clicked.connect(self.insert_bot_request)
         self.actionParaphrase_Text.triggered.connect(self.paraphrase_text)
         self.actionSummarize_Text.triggered.connect(self.summarize_text)
+
+        self.actionAbout_App.triggered.connect(about_app)
+        self.actionDeveloper.triggered.connect(about_me)
 
     # Functions
     # Set window title

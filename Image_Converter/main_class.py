@@ -1,4 +1,5 @@
 import os.path
+import subprocess
 
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
@@ -22,6 +23,7 @@ class ImageConverter(QMainWindow, Ui_ImaCon):
         self.listWidget.itemClicked.connect(
             lambda: self.create_thumbnail(self.images[self.listWidget.currentRow()])
         )
+        self.convert_btn.clicked.connect(self.convert_images)
 
     # Add Images
     def add_images(self):
@@ -99,3 +101,44 @@ class ImageConverter(QMainWindow, Ui_ImaCon):
             )
         except Exception as e:
             print(f"Image details error: {e}")
+
+    def convert_images(self):
+        # Check if images are loaded
+        if len(self.images) == 0:
+            QMessageBox.warning(
+                self, "Conversion Error",
+                "No images have been loaded. Load images before converting"
+            )
+            return
+        # Check if a valid extension is selected
+        if self.comboBox.currentText() == "":
+            QMessageBox.warning(
+                self, "Output Extension Error",
+                "Select a valid a extension to continue"
+            )
+            return
+
+        try:
+            extension = f".{self.comboBox.currentText()}"
+            path = QFileDialog.getExistingDirectory(self, "Select where to save files")
+
+            if path:
+                for image in self.images:
+                    img = Image.open(image)
+                    output_img = os.path.join(
+                        path,
+                        f"{os.path.basename(image).split('.')[0]}{extension}"
+                    )
+                    img.save(output_img)
+
+                question = QMessageBox.question(
+                    self, "Successful Conversion",
+                    "Image(s) have been converted successfully.\n"
+                    "Do you want to open the output folder?",
+                    QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel, QMessageBox.No
+                )
+                if question == QMessageBox.Yes:
+                    path_ = os.path.relpath(path)
+                    subprocess.Popen(f"explorer {path_}")
+        except Exception as e:
+            print(f"Image Conversion Error: {e}")
